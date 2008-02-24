@@ -1,0 +1,6 @@
+#summary The project description.
+#labels Featured,Phase-Requirements
+
+= gnimark =
+
+A gnizr bookmark recommendation applet that when placed on a webpage uses gnizr to find other relevant webpages and recommends them.
