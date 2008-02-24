@@ -1,7 +1,6 @@
 #summary Log of changes in code
 #labels Featured
 
-=== changelog ===
+=== Version 0.0.0 ===
 
-==== Version 0.0.0 ====
 * No code, just ideas.
