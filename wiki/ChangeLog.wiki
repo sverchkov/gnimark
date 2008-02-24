@@ -4,4 +4,3 @@
 === Version 0.0.0 ===
 
  * No code, just ideas.
- *
