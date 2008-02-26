@@ -3,6 +3,6 @@
 
 = Application Design =
 
-See our work flow diagram at http://code.google.com/p/gnimark/wiki/workFlow.pdf.
+See our work flow diagram at http://userpages.umbc.edu/~jm1/gnimarkWorkFlow.pdf.
 
-See our class diagram at http://code.google.com/p/gnimark/wiki/classDiagram.pdf.
+See our class diagram at http://userpages.umbc.edu/~jm1/gnimarkDesign.pdf.
