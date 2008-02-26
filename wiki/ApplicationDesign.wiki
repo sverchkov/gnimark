@@ -3,6 +3,6 @@
 
 = Application Design =
 
-See our <a href="http://code.google.com/p/gnimark/wiki/workFlow.pdf">work flow diagram</a>.
+See our work flow diagram at http://code.google.com/p/gnimark/wiki/workFlow.pdf.
 
-See our <a href="http://code.google.com/p/gnimark/wiki/classDiagram.pdf">class diagram</a>.
+See our class diagram at http://code.google.com/p/gnimark/wiki/classDiagram.pdf.
