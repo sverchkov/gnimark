@@ -1,4 +1,10 @@
 #summary Development Tasks
 #labels Featured
 
-Our Milestone Plan. Nothing here yet.
+- Finalize Design by 2/29/08
+
+- Divide Work up by class by 3/7/08
+
+- Finish Implementation 1 week before due date.
+
+- Finish Debugging by due date.
