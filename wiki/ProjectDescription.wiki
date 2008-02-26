@@ -1,0 +1,2 @@
+#labels Featured
+Gnimark is a gnizr bookmark recommendation applet. It recommends urls based upon the content, url, and bookmark labels for its current page.
