@@ -1,10 +1,12 @@
 #summary Development Tasks
 #labels Featured
 
-- Finalize Design by 2/29/08
+---By 7-Mar-2008---
+* Finalize Design.
+* Divide Work up.
 
-- Divide Work up by class by 3/7/08
+---By 30-Apr-2008---
+* Finish Implementation 1 week before due date.
 
-- Finish Implementation 1 week before due date.
-
-- Finish Debugging by due date.
+---By 7-May-2008---
+* Finish Debugging.
