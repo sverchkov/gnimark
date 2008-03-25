@@ -6,3 +6,13 @@
 See our work flow diagram at http://userpages.umbc.edu/~jm1/gnimarkWorkFlow.pdf.
 
 See our class diagram at http://userpages.umbc.edu/~jm1/gnimarkDesign.pdf.
+
+= Prototype Screenshots =
+
+Gnimark open screenshot at http://userpages.umbc.edu/~tavener1/gnimark_open.jpg
+
+Gnimark closed screenshot at http://userpages.umbc.edu/~tavener1/gnimark_closed.jpg
+
+(Gnimark is at the bottom right of each screenshot.)
+
+The above screenshots are from a working prototype of the system's front end.   This prototype makes ajax calls to a stub backend page to display the links shown in the screenshots.  Upon project completion, this stub backend page will be replaced with logic that can recommend bookmarks to a user based upon the content of the page gnimark is hosted on as well as what other users of Gnizr have been bookmarking.
