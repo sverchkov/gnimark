@@ -1,1 +1,3 @@
+4-21-2008: Complete gnimark front end (view) demo added. Instructions are in readme.txt.
+
 4-14-2008: GoogleCode test. --Update: Worked.
