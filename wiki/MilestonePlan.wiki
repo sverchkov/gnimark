@@ -5,7 +5,7 @@
 
 ====By 7-Mar-2008====
  * Finalize Design.
- * Divide Work up by teams for JavaScript front-end and Java back-end.
+ * Divide Work up by teams for Javascript front-end and Java back-end.
 
 ====By 22-Mar-2008=====
  * Google code project started.
@@ -13,7 +13,7 @@
  * Changelog started.
  
 ====By 1-Apr-2008====
- * Working JavaScript AJAX front-end.
+ * Working Javascript AJAX front-end.
 
 ====By 15-Apr-2008====
  * Prototype Java back-end.
@@ -23,7 +23,7 @@
 
 ====By 5-May-2008====
  * Integrate Java back-end with Gnizr.
- * Integrate JavaScript front-end with Gnizr.
+ * Integrate Javascript front-end with Gnizr.
 
 ====By 7-May-2008====
  * Finish Debugging.
