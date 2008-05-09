@@ -1,3 +1,5 @@
+package com.example.gnizr;
+
 public class Tuple implements Comparable
 {
 
