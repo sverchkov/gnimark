@@ -5,7 +5,7 @@
 
 var view = 'open';
 var inner = '';
-var url = 'http://localhost/GnimarkDemo/Gnijax.php';
+var url = 'http://discerningtexan.blogspot.com/'; //specify the name of this page in gnizr.
 
 /**
 * Takes page information and makes a call to the gnimark gnizr page.
@@ -14,23 +14,45 @@ var url = 'http://localhost/GnimarkDemo/Gnijax.php';
 */
 function Gnimark()
 {
+	
 	//first things first, lets make an ajax call.
-	var ajaxReq = new Ajax.Request(url, {
+	var ajaxReq = new Ajax.Request('proxy.php?message=\'c1' + url + '\'', {
   		method:'get',
   		onSuccess: function(transport){
-     		var json = transport.responseText.evalJSON();
+     		var json = transport.responseText;
+
+     	    array = json.split(",");
      	      
      	    var link_string= '';
-     	    for(i=0; i < json.length; i++)
+     	    for(i=0; i < array.length - 1; i++)
      	    {
      	    	//build our list of links.
-     	    	link_string = link_string + '<tr><td cellspacing=5 bgcolor=#FFF6CF>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=' + json[i]['url'] + '>' + json[i]['name'] + '</a></td></tr>';
+     	    	link_string = link_string + '<tr><td cellspacing=5 bgcolor=#FFF6CF>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=' + array[i]+ '>' + array[i] + '</a></td></tr>';
      	    }  
-     	    
-     	    
+
      	    //update the inner html of the span we want to show the links in.
-     	    $('Gnimark').innerHTML = '<table width=100% borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><b>Gnimark</b></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
-   		}
+     	    $('Gnimark').innerHTML = '<table width=200 borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><b>Gnimark</b></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
+   		
+   		
+   		    var ajaxReq = new Ajax.Request('proxy.php?message=\'' + url + '\'', {
+  				method:'get',
+  				onSuccess: function(transport){
+		     		var json = transport.responseText;
+		
+		     	    array = json.split(",");
+		     	      
+		     	    var link_string= '';
+		     	    for(i=0; i < array.length - 1; i++)
+		     	    {
+		     	    	//build our list of links.
+		     	    	link_string = link_string + '<tr><td cellspacing=5 bgcolor=#FFF6CF>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=' + array[i]+ '>' + array[i] + '</a></td></tr>';
+		     	    }  
+		
+		     	    //update the inner html of the span we want to show the links in.
+		     	    $('Gnimark').innerHTML = '<table width=200 borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><b>Gnimark</b></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
+		   		},
+			});
+   		},
 	});
 }
 

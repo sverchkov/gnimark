@@ -1,16 +1,11 @@
-<?php
-/*
- * This page is designe dto show how the ajax will fire and display what it needs to display.
- */
-?>
 <body onload="Gnimark()">
 
     <span id="Gnimark"></span>
     
     <script type="text/JavaScript" src="prototype.js"></script>
-    <script type="text/JavaScript" src="Gnimark.js">window.onload = function(){ Gnimark(); }</script>
+    <script type="text/JavaScript" src="Gnimark.js"></script>
 
-    <table onload="Gnimark()">
+    <table>
     	<tr>
     		<td>There is a bunch of content below.</td>
     	</tr>
