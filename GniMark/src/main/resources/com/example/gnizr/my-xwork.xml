@@ -1,0 +1,12 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+        "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+  <package name="gnizr-gnimark" extends="gnizr-default"
+           namespace="/gnimark">             
+    <action name="gnimarkAjax" class="com.example.gnizr.GnimarkAction">                 
+      <interceptor-ref name="gnizrDefaultStack"/>
+      <result name="success" type="freemarker">/gnimark/index.ftl</result>
+      <result name="error" type="freemarker">/common/error.ftl </result>
+    </action>           
+  </package>
+</xwork>

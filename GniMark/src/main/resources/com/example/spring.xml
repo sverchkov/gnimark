@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+        
+  <!-- initial gnizr system configuration -->
+  <!-- (copied from gnizr-webapp/src/main/resources as-is) -->
+  <import resource="gnizr-config.xml"/>
+        
+  <!-- standard spring configuration of gnizr -->
+  <!-- (copied from gnizr-webapp/src/main/resources as-is) -->
+  <import resource="spring/gnizr-dao.xml"/>
+  <import resource="spring/core-managers.xml"/>
+  <import resource="spring/core-pagers.xml"/>
+  <import resource="spring/core-tagging.xml"/>
+  <import resource="spring/core-search.xml"/>
+  <import resource="spring/core-bookmark.xml"/>
+  <import resource="spring/web-interceptors.xml"/>      
+  <import resource="spring/web-useradmin.xml"/>
+  <import resource="spring/web-userbmark.xml"/>
+  <import resource="spring/web-userfolder.xml"/>
+  <import resource="spring/web-usertags.xml"/>
+  <import resource="spring/web-userfeed.xml"/>
+  <import resource="spring/web-links.xml"/>
+  <import resource="spring/web-ui.xml"/>
+  <import resource="spring/web-clustermap.xml"/>
+  <import resource="spring/web-timeline.xml"/>
+  <import resource="spring/web-search.xml"/>
+  <import resource="classpath:com/gnizr/web/action/robot/rss/my-spring.xml"/>
+        
+  <!-- helloworld's spring config -->
+  <import resource="classpath:com/example/gnizr/my-spring.xml"/>
+</beans>
