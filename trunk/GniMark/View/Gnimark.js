@@ -16,11 +16,11 @@ var http = createRequestObject();
 function Gnimark()
 {
 
-    http.open('get', 'proxy.php?message=\'c1' + url + '\'');
+    http.open('get', 'proxy.php?message=\'c1' + document.location + '\'');
     http.onreadystatechange = handleResponse; //parses the result. //fills the board in with the starter values.
     http.send();
     
-    http.open('get', 'proxy.php?message=\'' + url + '\'');
+    http.open('get', 'proxy.php?message=\'' + document.location + '\'');
     http.onreadystatechange = handleResponse; //parses the result. //fills the board in with the starter values.
     http.send();
 
