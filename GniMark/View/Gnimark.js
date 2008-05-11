@@ -1,12 +1,13 @@
 /*
 * Gnimark Ajaxcode.
-* This bugger needs prototype to work.
 */
 
 var view = 'open';
 var inner = '';
-var url = 'http://discerningtexan.blogspot.com/'; //specify the name of this page in gnizr.
 var http = createRequestObject();
+
+var width = 200;
+var maxResponses = 3;
 
 /**
 * Takes page information and makes a call to the gnimark gnizr page.
@@ -15,13 +16,14 @@ var http = createRequestObject();
 */
 function Gnimark()
 {
-
-    http.open('get', 'proxy.php?message=\'c1' + document.location + '\'');
-    http.onreadystatechange = handleResponse; //parses the result. //fills the board in with the starter values.
+    //'fast' ajax call.
+    http.open('get', 'proxy.php?message=\'c'+ maxResponses + document.location + '\'');
+    http.onreadystatechange = handleResponse; 
     http.send();
     
-    http.open('get', 'proxy.php?message=\'' + document.location + '\'');
-    http.onreadystatechange = handleResponse; //parses the result. //fills the board in with the starter values.
+    //'slow' ajax call.
+    http.open('get', 'proxy.php?message=\'x' + maxResponses + document.location + '\'');
+    http.onreadystatechange = handleResponse; 
     http.send();
 
 }
@@ -46,12 +48,8 @@ function Gnimark_View_Switch()
 function createRequestObject() 
 {
     var ro;
-  
-            // almost everyone but MSIE less than 7
     try {
         ro = new XMLHttpRequest();
-
-    // MSIE branches
     } catch (e) {
         try {
             ro = new ActiveXObject("Msxml2.XMLHTTP");
@@ -65,7 +63,6 @@ function createRequestObject()
     }
     return ro;
 }
-
 
 function handleResponse() 
 {
@@ -83,10 +80,6 @@ function handleResponse()
      	    }  
 
      	    //update the inner html of the span we want to show the links in.
-     	    document.getElementById('Gnimark').innerHTML = '<table width=200 borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><b>Gnimark</b></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
+     	    document.getElementById('Gnimark').innerHTML = '<table width='+ width +' borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><b>Gnimark</b></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
     }
 }
-
-
-
-	
