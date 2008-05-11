@@ -6,7 +6,7 @@ import com.example.gnizr.Backend;
 import java.util.Vector;
 
 
-public class HelloWorldAction extends AbstractAction{
+public class GnimarkAction extends AbstractAction{
   
   private static final long serialVersionUID = 4604179423988890376L;
 
@@ -15,7 +15,7 @@ public class HelloWorldAction extends AbstractAction{
   private GnizrDao db;
   
   
-  public HelloWorldAction(GnizrDao db)
+  public GnimarkAction(GnizrDao db)
   {
 	  this.db = db;
   }
@@ -60,20 +60,23 @@ public class HelloWorldAction extends AbstractAction{
 	this.message = this.message.substring(1, this.message.length() - 1);
 	
 	//now i have to get the call number
-	String calltype = this.message.substring(0,2);
+	String calltype = this.message.substring(0,1);
+	
+	//the number of responses.
+	String responses = this.message.substring(1,2);
 	
 	//get the full message.
 	this.message = this.message.substring(2, this.message.length());
 	
 	Vector<String> urls = new Vector<String>();
 	
-	if(calltype.equals("c1"))
+	if(calltype.equals("c"))
 	{
-		urls = b.quickRecommend(this.message, 0, 3);
+		urls = b.quickRecommend(this.message, 0, Integer.parseInt(responses));
 	}
-	else
+	else if(calltype.equals("x"))
 	{
-		urls = b.slowRecommend(this.message, 0, 3);
+		urls = b.slowRecommend(this.message, 0, Integer.parseInt(responses));
 	}
 
 	String str = "";
