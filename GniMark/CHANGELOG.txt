@@ -1,6 +1,7 @@
 5-11-2008: Moved files to their proper folders.
 	   Removed references to helloworld.
            Revision history is saved at each files pervious location. Moving the files sstarted the history over.
+	   Changed Gnimark.js to follow new url to the gnimarkAjax page.
 
 5-9-2008: Gnimark AJAX communication between front and backend working. 
           No need for JSON support: Prototype library removed from front end to reduce size.
