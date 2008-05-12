@@ -42,20 +42,7 @@ public class GnimarkAction extends AbstractAction{
   protected String go() throws Exception {
     
 	Backend b = new Backend(db);
-	
-	/*
-	System.out.println(b.quickRecommend("http://michellemalkin.com/", 0, 3));
-	System.out.println(b.quickRecommend("http://michellemalkin.com/","gnizr", 0, 3));
-	System.out.println(b.quickRecommend("http://michellemalkin.com/","Justin", 0, 3));
-	System.out.println(b.slowRecommend("http://discerningtexan.blogspot.com/", 0, 3));
-	System.out.println(b.slowRecommend("http://discerningtexan.blogspot.com/","gnizr", 0, 3));
-	System.out.println(b.slowRecommend("http://discerningtexan.blogspot.com/","Justin", 0, 3));
-	System.out.println(b.slowRecommend("http://michellemalkin.com/","Justin", 0, 3));
-	*/
-	//                http://discerningtexan.blogspot.com
-	//this.message = "http://discerningtexan.blogspot.com/";
-	
-	
+
 	//strip off the " ' " at the beggining and end of hte message first.
 	this.message = this.message.substring(1, this.message.length() - 1);
 	
@@ -72,7 +59,7 @@ public class GnimarkAction extends AbstractAction{
 	
 	if(calltype.equals("c"))
 	{
-		urls = b.quickRecommend(this.message, 0, Integer.parseInt(responses));
+		urls = b.quickRecommend(this.message , 0, Integer.parseInt(responses));
 	}
 	else if(calltype.equals("x"))
 	{
