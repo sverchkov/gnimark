@@ -22,9 +22,9 @@ function Gnimark()
     http.send();
     
     //'slow' ajax call.
-    //http.open('get', 'proxy.php?message=\'x' + maxResponses + document.location + '\'');
-    //http.onreadystatechange = handleResponse; 
-    //http.send();
+    http.open('get', 'proxy.php?message=\'x' + maxResponses + document.location + '\'');
+    http.onreadystatechange = handleResponse; 
+    http.send();
 
 }
 
@@ -34,12 +34,14 @@ function Gnimark_View_Switch()
 	{
 		document.getElementById('GnimarkList').style.visibility = "hidden";
 		view = 'closed';
+		document.getElementById('GnimarkList').innerHTML = '';
 		document.getElementById('oc_link').innerHTML = "Open";
 	}
 	else
 	{
 		document.getElementById('GnimarkList').style.visibility = "visible";
 		view = 'open';
+		document.getElementById('GnimarkList').innerHTML = inner;
 		document.getElementById('oc_link').innerHTML = "Close";
 	}
 }
@@ -70,16 +72,31 @@ function handleResponse()
     {
         var response = http.responseText;
 
-     	    array = response.split(",");
-     	      
-     	    var link_string= '';
-     	    for(i=0; i < array.length - 1; i++)
-     	    {
-     	    	//build our list of links.
-     	    	link_string = link_string + '<tr><td cellspacing=5 bgcolor=#FFF6CF>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=' + array[i]+ '>' + array[i] + '</a></td></tr>';
-     	    }  
+   	    array = response.split(",");
+   	    arraynames = new Array();
+   	    
+   	    for(i=0; i < array.length - 1; i++){
+   	    	 arraynames[i] = array[i].replace('http://', '');
+   	    	 arraynames[i] = arraynames[i].replace('www.', '');
+   	    	 
+   	    	 if(arraynames[i].substring(arraynames[i].length - 1, arraynames[i].length) == '/'){
+   	    	 	arraynames[i] = arraynames[i].substring(0, arraynames[i].length - 1);
+   	    	 }
+   	    	 
+   	    	 if(arraynames[i].length > 40){
+   	    	 	arraynames[i] = arraynames[i].substring(0, 40);
+   	    	 }
+   	    }  
 
-     	    //update the inner html of the span we want to show the links in.
-     	    document.getElementById('Gnimark').innerHTML = '<table width='+ width +' borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><img height=18 src=\"gnimark.png\"></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
+   	    var link_string= '';
+   	    for(i=0; i < array.length - 1; i++)
+   	    {
+   	    	//build our list of links.
+   	    	link_string = link_string + '<tr><td cellspacing=5 bgcolor=#FFF6CF>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=' + array[i]+ '>' + arraynames[i] + '</a></td></tr>';
+   	    }  
+
+   	    //update the inner html of the span we want to show the links in.
+   	    document.getElementById('Gnimark').innerHTML = '<table width='+ width +' borderspacing=0 cellspacing=0 cellpadding=0 ><tr><td bgcolor=#FEF3B3><table width=100% borderspacing=0 cellspacing=2 cellpadding=0  style=\"border-width: 1px 1px 0px 1px; border-style: solid;\"><tr><td bgcolor=#FEF3B3 ><font color=#FE623C><img height=18 src=\"gnimark.png\"></font></td><td bgcolor=#FEF3B3 align=right><a href="Javascript:Gnimark_View_Switch()"><span id=oc_link>Close</span></a></td></tr></table></td></tr><tr><td colspan=2><table id=GnimarkList cellpadding=0 cellspacing=0 width=100% style=\"border-width: 1px 1px 1px 1px; border-style: solid;\">' + link_string + '</table></td></tr></table>';  
+  		inner = document.getElementById('GnimarkList').innerHTML;
     }
 }

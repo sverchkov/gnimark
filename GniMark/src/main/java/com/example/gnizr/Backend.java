@@ -155,110 +155,133 @@ public class Backend implements IBackend
 
 		//db = new GnizrDao();
 		LinkManager lm = new LinkManager(db);
-		Link start = lm.getFirstMatchedBookmark(url).getLink();
-		List<Bookmark> bookmarksForURL = lm.getHistory(start);
-		TagManager tm = new TagManager(db);
+		Bookmark bookmarkIn = lm.getFirstMatchedBookmark(url);
 		
-		if(bookmarksForURL != null)
+		try
 		{
-			for(int i=0; i < bookmarksForURL.size();i++)
+			if(bookmarkIn != null)
 			{
-				Bookmark curr = bookmarksForURL.get(i);
-				List<String> currTags = curr.getTagList();
-				for(int t=0; t < currTags.size(); t++)
-				{
-					//if the tag exists increment its count
-					if(tags.containsKey(currTags.get(t)))
-					{
-						double counter = 0;
-						counter = tags.get(currTags.get(t));
-						tags.remove(currTags.get(t));
-						tags.put(currTags.get(t), counter + 1);
-					}
-					else //add the tag with a count of 1
-					{
-						tags.put(currTags.get(t), (double) 1);
-					}
-				}
-			}
-
-			//Normalize the tag counts to create a set of weights
-			Vector<String> keys = new Vector<String>();
-			Vector<Double> values = new Vector<Double>();
-
-			for(Enumeration<String> e = tags.keys(); e.hasMoreElements();)
-			{
-				String tmpTag = e.nextElement();
-				keys.add(tmpTag);
-				values.add((double) tags.get(tmpTag));
-			}
-			VectorUtils.normalize(values);
-			//Replace the raw tag counts with their normalized versions
-			tags = new Hashtable<String,Double>();
-			for(int i=0; i < keys.size(); i++)
-			{
-				tags.put(keys.get(i), values.get(i));
-			}
-
-			//a list of all the unique links with any of the given tags
-			//which will hold their scores
-			Hashtable<String,Double> bookmarks = new Hashtable<String,Double>();
-
-			BookmarkDao bookmarkDB = db.getBookmarkDao();
-			for(int t=0; t < keys.size(); t++)
-			{
+				Link start = bookmarkIn.getLink();
+				List<Bookmark> bookmarksForURL = lm.getHistory(start);
+				TagManager tm = new TagManager(db);
 				
-				
-				int numResults = bookmarkDB.getBookmarkCount(tm.getTag(keys.get(t)));
-				List<Bookmark> potentialResults= bookmarkDB.pageBookmarks(tm.getTag(keys.get(t)), 0, numResults).getResult();
-				if(potentialResults != null)
+				if(bookmarksForURL != null)
 				{
-					for(int r=0; r < potentialResults.size(); r++)
+					for(int i=0; i < bookmarksForURL.size();i++)
 					{
-						String currLink = potentialResults.get(r).getLink().getUrl();
-						List<String> tagsForLink = potentialResults.get(r).getTagList();
-						if(tagsForLink != null)
+						Bookmark curr = bookmarksForURL.get(i);
+						List<String> currTags = curr.getTagList();
+						for(int t=0; t < currTags.size(); t++)
 						{
-							double score = 0;
-							for(int l=0; l < tagsForLink.size(); l++)
+							//if the tag exists increment its count
+							if(tags.containsKey(currTags.get(t)))
 							{
-								double valForTag = 0;
-								//System.out.println(tagsForLink.get(l));
-								try{valForTag = tags.get(tagsForLink.get(l));} catch (NullPointerException npe){}
-								score += valForTag;
+								double counter = 0;
+								counter = tags.get(currTags.get(t));
+								tags.remove(currTags.get(t));
+								tags.put(currTags.get(t), counter + 1);
 							}
-							bookmarks.put(currLink, score);
+							else //add the tag with a count of 1
+							{
+								tags.put(currTags.get(t), (double) 1);
+							}
 						}
-						//else System.out.println("No tags for "+currLink);
 					}
-				}
-			}
-
-			Vector<Tuple> pairs = new Vector<Tuple>();
-
-			for(Enumeration<String> e = bookmarks.keys(); e.hasMoreElements();)
-			{
-				String tmpLink = e.nextElement();
-				double tmpScore = (double) bookmarks.get(tmpLink);
-				pairs.add(new Tuple(tmpLink, tmpScore));
-			}
-
-			Collections.sort( pairs );
-
-			int throwaways = offset;
-			for(int t = 0; t < pairs.size(); t++)
-			{
-				String urlOut = pairs.get(t).str;
-				if(!urlOut.equalsIgnoreCase(url)) // If this is useful
-				{
-					if(! VectorUtils.containsIgnoreCase(answer, urlOut))
+		
+					//Normalize the tag counts to create a set of weights
+					Vector<String> keys = new Vector<String>();
+					Vector<Double> values = new Vector<Double>();
+		
+					for(Enumeration<String> e = tags.keys(); e.hasMoreElements();)
 					{
-						if( answer.size() >= count) break; //Get out if we're done
-						if( throwaways > 0) throwaways--; // Count down throwaways
-						else answer.add(urlOut); // Or add result
+						String tmpTag = e.nextElement();
+						keys.add(tmpTag);
+						values.add((double) tags.get(tmpTag));
+					}
+					VectorUtils.normalize(values);
+					//Replace the raw tag counts with their normalized versions
+					tags = new Hashtable<String,Double>();
+					for(int i=0; i < keys.size(); i++)
+					{
+						tags.put(keys.get(i), values.get(i));
+					}
+		
+					//a list of all the unique links with any of the given tags
+					//which will hold their scores
+					Hashtable<String,Double> bookmarks = new Hashtable<String,Double>();
+		
+					BookmarkDao bookmarkDB = db.getBookmarkDao();
+					for(int t=0; t < keys.size(); t++)
+					{
+						
+						
+						int numResults = bookmarkDB.getBookmarkCount(tm.getTag(keys.get(t)));
+						List<Bookmark> potentialResults= bookmarkDB.pageBookmarks(tm.getTag(keys.get(t)), 0, numResults).getResult();
+						if(potentialResults != null)
+						{
+							for(int r=0; r < potentialResults.size(); r++)
+							{
+								String currLink = potentialResults.get(r).getLink().getUrl();
+								List<String> tagsForLink = potentialResults.get(r).getTagList();
+								if(tagsForLink != null)
+								{
+									double score = 0;
+									for(int l=0; l < tagsForLink.size(); l++)
+									{
+										double valForTag = 0;
+										//System.out.println(tagsForLink.get(l));
+										try{valForTag = tags.get(tagsForLink.get(l));} catch (NullPointerException npe){}
+										score += valForTag;
+									}
+									bookmarks.put(currLink, score);
+								}
+								//else System.out.println("No tags for "+currLink);
+							}
+						}
+					}
+		
+					Vector<Tuple> pairs = new Vector<Tuple>();
+		
+					for(Enumeration<String> e = bookmarks.keys(); e.hasMoreElements();)
+					{
+						String tmpLink = e.nextElement();
+						double tmpScore = (double) bookmarks.get(tmpLink);
+						pairs.add(new Tuple(tmpLink, tmpScore));
+					}
+		
+					Collections.sort( pairs );
+		
+					int throwaways = offset;
+					for(int t = 0; t < pairs.size(); t++)
+					{
+						String urlOut = pairs.get(t).str;
+						if(!urlOut.equalsIgnoreCase(url)) // If this is useful
+						{
+							if(! VectorUtils.containsIgnoreCase(answer, urlOut))
+							{
+								if( answer.size() >= count) break; //Get out if we're done
+								if( throwaways > 0) throwaways--; // Count down throwaways
+								else answer.add(urlOut); // Or add result
+							}
+						}
 					}
 				}
 			}
+			else
+			{
+				//if something broke up there we should make the same call to quick recommend.
+				answer = quickRecommend(url, offset, count);
+			}
+		}
+		catch(Exception err)
+		{
+			//basically, if ANYTHING goes wrong up above, call the quickRecommend.
+			answer = answer = quickRecommend(url, offset, count);
+		}
+		catch(Throwable thr)
+		{
+			//overkill absolutely uber errorchecking.
+			answer = answer = quickRecommend(url, offset, count);
 		}
 		return answer;
 	}
